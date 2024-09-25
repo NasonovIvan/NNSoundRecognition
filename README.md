@@ -2,7 +2,7 @@
 Transfer Learning Xception was used for recognizing and classifying whale voices using spectrograms and time series of signal complexity.
 
 <p align="center">
-	<img src="https://github.com/NasonovIvan/NN-whale-recognition/blob/main/images/marinexplore_kaggle.png" width="350">
+	<img src="https://github.com/NasonovIvan/NNSoundRecognition/blob/main/images/marinexplore_kaggle.png" width="350">
 </p>
 
 ## Project Structure
@@ -74,7 +74,7 @@ In my work, I concentrated on the analysis of spectrogram images by the [Xceptio
 ### Data:
 The Kaggle training set includes approximately 30,000 labeled audio files. Each file encodes a two second monophonic audio clip in AIFF format with a 2000 Hz sampling rate. Based on these files, I obtained spectrogram images, as in the example below:
 <p align="center">
-	<img src="https://github.com/NasonovIvan/NN-whale-recognition/blob/main/images/train4.png" width="350">
+	<img src="https://github.com/NasonovIvan/NNSoundRecognition/blob/main/images/train4.png" width="350">
 </p>
 
 ### Formation of information characteristics
@@ -89,7 +89,7 @@ Each Inception module applies univariate convolutions with kernels 1, 2 and 4 to
 A network based on InceptionTime but modified by Residual technology has also been developed. This mechanism is introduced in the Inception block, in which the input vector is transferred to the final layer by a separate channel, added to the data processed through one-dimensional convolution layers. The Residual technique effectively combats the problem of gradient fading and speeds up the learning process. The main goal of this modification is to evaluate the impact of Residual on the network's ability to classify time series.
 
 <p align="center">
-	<img src="https://github.com/NasonovIvan/NN-whale-recognition/blob/main/images/inceptiontime-res-1.png" width="800">
+	<img src="https://github.com/NasonovIvan/NNSoundRecognition/blob/main/images/inceptiontime-res-1.png" width="800">
 </p>
 
 ### Attention
@@ -106,14 +106,14 @@ The main property of this layer is the use of multiple transformations to emphas
 In the network, the data is fed to the LSTM and Multi-Head Attention blocks in parallel, and subsequently their outputs are combined into a single layer, from which they are passed through a normalisation layer to improve stability, accelerate training convergence and address gradient fading. The data is then fed into the fully-connected TimeDistributed layers, which process the data in each time step independently of each other. A schematic of the Self-Attention network model is shown in the figure below
 
 <p align="center">
-	<img src="https://github.com/NasonovIvan/NN-whale-recognition/blob/main/images/attention-1.png" width="800">
+	<img src="https://github.com/NasonovIvan/NNSoundRecognition/blob/main/images/attention-1.png" width="800">
 </p>
 
 ### Xception:
 [Xception](https://arxiv.org/abs/1610.02357) is a convolutional neural network that is 71 layers deep. I loaded a pretrained version of the network trained on more than a million images from the ImageNet database. The pretrained network can classify images into 1000 object categories. As a result, the network has learned rich feature representations for a wide range of images, and it is what I used for recognizing and classifying whale voices' spectrograms.
 
 <p align="center">
-	<img src="https://github.com/NasonovIvan/NN-whale-recognition/blob/main/images/depthwise.png" width="350">
+	<img src="https://github.com/NasonovIvan/NNSoundRecognition/blob/main/images/depthwise.png" width="350">
 </p>
 
 Training and testing of neural networks has been carried out on two different datasets of similar nature. For training, a dataset from the Kaggle competition with audio recordings of whale songs with each recording lasting 2 seconds and sampling rate of 2 kHz was chosen.
@@ -135,7 +135,7 @@ As a result of training InceptionTime, InceptionTime Residual neural networks an
 The main quality indicator of the signal detection problem is the ROC curve (receiver operating characteristic) and the area under it AUC ROC. The figure shows the error matrix and ROC-curve of the best trained classifier InceptionTime Residual.
 
 <p align="center">
-	<img src="https://github.com/NasonovIvan/NN-whale-recognition/blob/main/images/ROC_incept_ris-1.png" width="350"> <img src="https://github.com/NasonovIvan/NN-whale-recognition/blob/main/images/ConfMatr_incept_ris-1.png" width="270">
+	<img src="https://github.com/NasonovIvan/NNSoundRecognition/blob/main/images/ROC_incept_ris-1.png" width="350"> <img src="https://github.com/NasonovIvan/NNSoundRecognition/blob/main/images/ConfMatr_incept_ris-1.png" width="270">
 </p>
 
 Analysing the obtained results, it can be observed that all networks showed similar high performance with close AUC ROC values. Interestingly, the Self-Attention based network achieves performance of the main quality metrics comparable to the InceptionTime network, but has better Recall and Precision metrics, which indicates the good ability of this architecture to classify time series. InceptionTime network with Residual technology ranks first in all metrics in the table, which shows the high efficiency of this method.
