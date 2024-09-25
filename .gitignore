@@ -1,0 +1,13 @@
+article/
+data/
+datasets/
+spectrograms/
+**/x_data_hc.npy
+**/y_data_hc.npy
+**/.DS_Store
+**/.ipynb_checkpoints/
+**/__pycache__/
+**/py_log.log
+**/logs/
+**/weights_networks/
+**/*.pdf
